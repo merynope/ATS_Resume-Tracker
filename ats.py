@@ -13,7 +13,7 @@ import google.generativeai as genai
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def gemini_response(input,pdf_content,prompt): 
-    model=genai.GenerativeModel("gemini-pro-vision")
+    model=genai.GenerativeModel("gemini-1.5-pro")
     response=model.generate_content( [input,pdf_content[0],prompt] )
     return response.text
 
@@ -55,20 +55,40 @@ submit2 = st.button("What can I do to improvise my skills")
 submit3 = st.button("Percentage match")
 
 
-input_prompt1 ='''You are an expert you are an experienced HR with tech experience in the field of any one job role in either data science 
-or web development or big data engineering or data analyst, your task is to review the Provide against the job description
-for all these profiles. Please share your professional evaluation on whether the candidate profile aligns with the role. 
-Highlight the strength and weakness of the applicant in relation to the specified job requirements '''
+input_prompt1= ''' As an HR expert with experience in one of the following roles: Data Scientist, Web Developer, Big Data Engineer, or Data Analyst,
+please evaluate the provided resume against the given job description. Assess how well the candidate’s qualifications match the job requirements,
+and provide a detailed evaluation highlighting their strengths and weaknesses relative to the role.'''
 
-input_prompt2 = ''' You are a technical human resource manager with expertise in field of any one job role in either data science 
-or web development or big data engineering or data analyst, your role is to scrutinize the résumé in light of the job 
-description provided. Share your insights on the candidates' skills for the role from HR perspective. 
-Additionally offer advice on enhancing the candidate skills and identify areas of improvement. '''
+# input_prompt1 ='''You are an expert you are an experienced HR with tech experience in the field of any one job role in either data science 
+# or web development or big data engineering or data analyst, your task is to review the Provide against the job description
+# for all these profiles. Please share your professional evaluation on whether the candidate profile aligns with the role. 
+# Highlight the strength and weakness of the applicant in relation to the specified job requirements '''
 
-input_prompt3 = ''' You are an skilled ATS (Applicant Tracking System) scanner with a deep understanding field of any one 
-job role in either data science or web development or big data engineering or data analyst, and deep ATS functionality, 
-your task is to evaluate the resume against the provided job description. give me the percentage of match if the resume 
-matches the job description. First the output should come as percentage and then keywords missing and last final thoughts. '''
+
+input_prompt2 = '''As a technical HR manager with expertise in one of the following roles: Data Scientist, Web Developer, Big Data Engineer, or Data Analyst,
+review the provided resume in the context of the given job description. Offer insights on the candidate’s skills and qualifications from an HR perspective,
+and provide recommendations for skill enhancement and areas for improvement to better align with the job requirements.'''
+
+
+
+# input_prompt2 = ''' You are a technical human resource manager with expertise in field of any one job role in either data science 
+# or web development or big data engineering or data analyst, your role is to scrutinize the résumé in light of the job 
+# description provided. Share your insights on the candidates' skills for the role from HR perspective. 
+# Additionally offer advice on enhancing the candidate skills and identify areas of improvement. '''
+
+
+input_prompt3 = '''As an ATS expert with in-depth knowledge of the following roles: Data Scientist, Web Developer, Big Data Engineer, or Data Analyst,
+evaluate the provided resume against the job description. Provide a percentage score indicating how well the resume matches the job description,
+followed by a list of missing keywords and any final thoughts or observations along with a match percentage of resume to job description.'''
+
+
+
+
+
+# input_prompt3 = ''' You are an skilled ATS (Applicant Tracking System) scanner with a deep understanding field of any one 
+# job role in either data science or web development or big data engineering or data analyst, and deep ATS functionality, 
+# your task is to evaluate the resume against the provided job description. give me the percentage of match if the resume 
+# matches the job description. First the output should come as percentage and then keywords missing and last final thoughts. '''
 
 if submit1: 
     if uploaded_file is not None: 
