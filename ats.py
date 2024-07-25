@@ -53,6 +53,7 @@ submit1 = st.button("About the Resume")
 submit2 = st.button("What can I do to improvise my skills")
 
 submit3 = st.button("Percentage match")
+submit4 = st.button("tailer resume")
 
 
 input_prompt1= ''' As an HR expert with experience in one of the following roles: Data Scientist, Web Developer, Big Data Engineer, or Data Analyst,
@@ -90,6 +91,9 @@ followed by a list of missing keywords and any final thoughts or observations al
 # your task is to evaluate the resume against the provided job description. give me the percentage of match if the resume 
 # matches the job description. First the output should come as percentage and then keywords missing and last final thoughts. '''
 
+input_prompt4= '''You are a skilled ATS(Appliication Tracking System) comapatable resume writer with deep understanding of devops and generative ai field along with complete ATS functionality, 
+Your Task is to tailor the resume according to the job description and give me the resume the output should be as given resume format and it must match up to 95 percent of job description. Also mention below what are the chnages you have made'''
+
 if submit1: 
     if uploaded_file is not None: 
         pdf_content=input_pdf_setup(uploaded_file)
@@ -110,6 +114,12 @@ elif submit3:
     if uploaded_file is not None: 
         pdf_content=input_pdf_setup(uploaded_file)
         response=gemini_response(input_prompt3,pdf_content,input_text)
+        st.subheader("The response is ")
+        st.write(response)
+elif submit4:
+    if uploaded_file is not None: 
+        pdf_content=input_pdf_setup(uploaded_file)
+        response=gemini_response(input_prompt4,pdf_content,input_text)
         st.subheader("The response is ")
         st.write(response)
     else: 
